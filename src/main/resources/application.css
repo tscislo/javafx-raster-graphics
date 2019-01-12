@@ -1,0 +1,12 @@
+.right-pane {
+    -fx-padding: 20px;
+}
+.left-pane {
+    -fx-padding: 20px;
+}
+.source-image {
+    -fx-border-color: #000000;
+    -fx-border-style:solid;
+    -fx-border-width:3px;
+    -fx-border-radius:5px;
+}
