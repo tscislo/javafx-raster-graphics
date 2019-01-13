@@ -7,6 +7,6 @@
 .source-image {
     -fx-border-color: #000000;
     -fx-border-style:solid;
-    -fx-border-width:3px;
+    -fx-border-width:2px;
     -fx-border-radius:5px;
 }
