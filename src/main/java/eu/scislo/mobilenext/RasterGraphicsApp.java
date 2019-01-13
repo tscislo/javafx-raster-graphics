@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class RasterGraphicsApp extends Application {
@@ -32,19 +33,22 @@ public class RasterGraphicsApp extends Application {
         leftVBox.getChildren().addAll(rasterGraphicsImage.canvasScrollPane);
 
         VBox rightVBox = new VBox();
+        rightVBox.setSpacing(10);
+        rightVBox.setMaxWidth(300);
         HBox buttonsBox = new HBox();
         rightVBox.getStyleClass().add("right-pane");
         rightVBox.setAlignment(Pos.TOP_LEFT);
         buttonsBox.setSpacing(10);
         buttonsBox.getChildren().addAll(rasterGraphicsImage.read, rasterGraphicsParts.clear);
-        rightVBox.getChildren().addAll(buttonsBox);
+        rightVBox.getChildren().addAll(buttonsBox, rasterGraphicsParts.flowPane);
 
         BorderPane rootPane = new BorderPane();
-        Scene scene = new Scene(rootPane, 900, 500);
+        Scene scene = new Scene(rootPane, 750, 480);
         scene.getStylesheets().add("application.css");
         primaryStage.setTitle("Raster Graphics");
         primaryStage.setScene(scene);
 
+        primaryStage.setResizable(false);
         primaryStage.show();
         rootPane.setRight(rightVBox);
         rootPane.setLeft(leftVBox);
