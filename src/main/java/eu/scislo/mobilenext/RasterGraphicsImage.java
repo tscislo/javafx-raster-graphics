@@ -29,11 +29,11 @@ public class RasterGraphicsImage implements EventHandler {
 
     private void configureFileChooser() {
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("Wszystkie obrazki", "*.*"),
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
-        fileChooser.setTitle("View Pictures");
+        fileChooser.setTitle("Przeglądaj zdjęcia...");
         fileChooser.setInitialDirectory(
                 new File(System.getProperty("user.home"))
         );
