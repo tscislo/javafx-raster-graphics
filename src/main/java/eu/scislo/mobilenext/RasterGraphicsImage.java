@@ -43,7 +43,6 @@ public class RasterGraphicsImage implements EventHandler {
         this.sourceImage = new Image(imagePath);
         int height = (int) sourceImage.getHeight();
         int width = (int) sourceImage.getWidth();
-        this.configureFileChooser();
         this.canvas = new Canvas(width, height);
         this.canvasScrollPane.setPrefSize(256, 600);
         this.canvasScrollPane.setContent(canvas);
@@ -58,7 +57,7 @@ public class RasterGraphicsImage implements EventHandler {
     public RasterGraphicsImage(Stage stage) {
         this.stage = stage;
         this.renderImage("chewie.jpg");
-
+        this.configureFileChooser();
         read.setOnAction(this);
         canvas.setOnMouseClicked(this);
     }
@@ -70,6 +69,7 @@ public class RasterGraphicsImage implements EventHandler {
             System.out.println("Action");
             File file = fileChooser.showOpenDialog(stage);
             if (file != null) {
+                // suggests GC to run, because we are rendering new image
                 System.gc();
                 System.runFinalization();
                 this.renderImage(file.toURI().toString());
