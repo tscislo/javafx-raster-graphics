@@ -77,8 +77,8 @@ public class RasterGraphicsImage extends Node implements EventHandler {
                         alert.showAndWait();
                     } else {
                         // suggests GC to run, because we are rendering new image
-                        System.gc();
-                        System.runFinalization();
+//                        System.gc();
+//                        System.runFinalization();
                         this.renderImage(file.toURI().toString());
                     }
                 } catch (IOException e) {

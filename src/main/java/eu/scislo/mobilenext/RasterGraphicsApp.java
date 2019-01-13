@@ -1,6 +1,7 @@
 package eu.scislo.mobilenext;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -22,6 +23,7 @@ public class RasterGraphicsApp extends Application {
 
     private RasterGraphicsImage rasterGraphicsImage;
     private RasterGraphicsParts rasterGraphicsParts;
+    public Button exit = new Button("Zakończ");
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -39,7 +41,7 @@ public class RasterGraphicsApp extends Application {
         rightVBox.getStyleClass().add("right-pane");
         rightVBox.setAlignment(Pos.TOP_LEFT);
         buttonsBox.setSpacing(10);
-        buttonsBox.getChildren().addAll(rasterGraphicsImage.read, rasterGraphicsParts.clear);
+        buttonsBox.getChildren().addAll(rasterGraphicsImage.read, rasterGraphicsParts.clear, this.exit);
         rightVBox.getChildren().addAll(buttonsBox, rasterGraphicsParts.flowPane);
 
         BorderPane rootPane = new BorderPane();
@@ -48,13 +50,18 @@ public class RasterGraphicsApp extends Application {
         primaryStage.setTitle("Raster Graphics");
         primaryStage.setScene(scene);
 
-        primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
         rootPane.setRight(rightVBox);
         rootPane.setLeft(leftVBox);
 
         this.rasterGraphicsImage.changed.subscribe(rasterGraphicsEvent -> {
-           System.out.println(rasterGraphicsEvent.type);
+            System.out.println(rasterGraphicsEvent.type);
+        });
+
+        this.exit.setOnAction((event) -> {
+            Platform.exit();
+            System.exit(0);
         });
 
     }
