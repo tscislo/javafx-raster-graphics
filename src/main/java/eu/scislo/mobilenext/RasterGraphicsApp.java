@@ -47,17 +47,32 @@ public class RasterGraphicsApp extends Application {
         BorderPane rootPane = new BorderPane();
         Scene scene = new Scene(rootPane, 750, 480);
         scene.getStylesheets().add("application.css");
+
+
         primaryStage.setTitle("Raster Graphics");
         primaryStage.setScene(scene);
 
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.UNIFIED);
         primaryStage.show();
         rootPane.setRight(rightVBox);
         rootPane.setLeft(leftVBox);
 
-        this.rasterGraphicsImage.changed.subscribe(rasterGraphicsEvent -> {
-            System.out.println(rasterGraphicsEvent.type);
-        });
+
+        this.rasterGraphicsImage
+                .changed
+                .filter(rasterGraphicsEvent -> rasterGraphicsEvent.type == RasterGraphicsEventTypes.IMAGE_LOADED)
+                .subscribe(rasterGraphicsEvent -> {
+                    System.out.println(rasterGraphicsEvent.type);
+                });
+
+        this.rasterGraphicsImage
+                .changed
+                .filter(rasterGraphicsEvent -> rasterGraphicsEvent.type == RasterGraphicsEventTypes.NEW_SELECTION)
+                .subscribe(rasterGraphicsEvent -> {
+                    System.out.println(rasterGraphicsEvent.type);
+                    RasterGraphicsEventPayload<RasterGraphicsPart> rasterGraphicsEventPayload = (RasterGraphicsEventPayload<RasterGraphicsPart>) rasterGraphicsEvent;
+                    this.rasterGraphicsParts.add(rasterGraphicsEventPayload.payload);
+                });
 
         this.exit.setOnAction((event) -> {
             Platform.exit();
