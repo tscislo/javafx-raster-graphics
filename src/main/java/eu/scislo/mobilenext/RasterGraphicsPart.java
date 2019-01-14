@@ -6,6 +6,9 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
+/**
+ * TODO: Implement comparator!
+ */
 public class RasterGraphicsPart {
     public static int width = 41; // must be odd
     public static int height = 41; // must be odd
