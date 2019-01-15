@@ -60,7 +60,7 @@ public class RasterGraphicsImage implements EventHandler {
 
     public RasterGraphicsImage(Stage stage) {
         this.stage = stage;
-        this.renderImage("colors.png");
+        this.renderImage("red.png");
         this.configureFileChooser();
         read.setOnAction(this);
     }

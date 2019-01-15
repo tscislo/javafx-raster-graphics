@@ -62,14 +62,13 @@ public class RasterGraphicsApp extends Application {
                 .changed
                 .filter(rasterGraphicsEvent -> rasterGraphicsEvent.type == RasterGraphicsEventTypes.IMAGE_LOADED)
                 .subscribe(rasterGraphicsEvent -> {
-                    System.out.println(rasterGraphicsEvent.type);
+                    this.rasterGraphicsParts.clear();
                 });
 
         this.rasterGraphicsImage
                 .changed
                 .filter(rasterGraphicsEvent -> rasterGraphicsEvent.type == RasterGraphicsEventTypes.NEW_SELECTION)
                 .subscribe(rasterGraphicsEvent -> {
-                    System.out.println(rasterGraphicsEvent.type);
                     RasterGraphicsEventPayload<RasterGraphicsPart> rasterGraphicsEventPayload = (RasterGraphicsEventPayload<RasterGraphicsPart>) rasterGraphicsEvent;
                     this.rasterGraphicsParts.add(rasterGraphicsEventPayload.payload);
                 });

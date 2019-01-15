@@ -38,4 +38,18 @@ public class RasterGraphicsPart {
         return this.canvas;
     }
 
+    public String toString() {
+        return Double.toString(this.getMeanRedPart());
+    }
+
+    public double getMeanRedPart() {
+        double redPart = 0;
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                redPart += colors[x][y].getRed();
+            }
+        }
+        return redPart;
+    }
+
 }
