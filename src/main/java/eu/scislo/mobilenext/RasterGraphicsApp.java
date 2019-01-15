@@ -2,19 +2,11 @@ package eu.scislo.mobilenext;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -36,16 +28,17 @@ public class RasterGraphicsApp extends Application {
 
         VBox rightVBox = new VBox();
         rightVBox.setSpacing(10);
-        rightVBox.setMaxWidth(300);
         HBox buttonsBox = new HBox();
         rightVBox.getStyleClass().add("right-pane");
-        rightVBox.setAlignment(Pos.TOP_LEFT);
         buttonsBox.setSpacing(10);
         buttonsBox.getChildren().addAll(rasterGraphicsImage.read, rasterGraphicsParts.clear, this.exit);
         rightVBox.getChildren().addAll(buttonsBox, rasterGraphicsParts.flowPane);
 
-        BorderPane rootPane = new BorderPane();
-        Scene scene = new Scene(rootPane, 750, 480);
+        HBox main = new HBox();
+        main.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(main, 950, 480);
+        primaryStage.setMinWidth(550);
+        primaryStage.setMinHeight(480);
         scene.getStylesheets().add("application.css");
 
 
@@ -54,9 +47,7 @@ public class RasterGraphicsApp extends Application {
 
         primaryStage.initStyle(StageStyle.UNIFIED);
         primaryStage.show();
-        rootPane.setRight(rightVBox);
-        rootPane.setLeft(leftVBox);
-
+        main.getChildren().addAll(leftVBox, rightVBox);
 
         this.rasterGraphicsImage
                 .changed

@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RasterGraphicsImage implements EventHandler {
@@ -92,13 +94,15 @@ public class RasterGraphicsImage implements EventHandler {
 
             Color colors[][] = new Color[RasterGraphicsPart.width][RasterGraphicsPart.height];
 
+
             int startX = clickX - (RasterGraphicsPart.width - 1) / 2 - 1;
             int startY = clickY - (RasterGraphicsPart.height - 1) / 2 - 1;
 
-            // TODO: Handle case when click on the left or top edge!
             for (int x = startX; x < clickX + (RasterGraphicsPart.width - 1) / 2; x++) {
                 for (int y = startY; y < clickY + (RasterGraphicsPart.height - 1) / 2; y++) {
-                    colors[x - startX][y - startY] = reader.getColor(x, y);
+                    if (!(x < 0 || x >= this.sourceImage.getWidth() || y < 0 || y >= this.sourceImage.getHeight())) {
+                        colors[x - startX][y - startY] = reader.getColor(x, y);
+                    }
                 }
             }
             RasterGraphicsPart rasterGraphicsPart = new RasterGraphicsPart(colors);

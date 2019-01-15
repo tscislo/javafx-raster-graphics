@@ -6,19 +6,18 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
-/**
- * TODO: Implement comparator!
- */
+
 public class RasterGraphicsPart {
-    public static int width = 41; // must be odd
-    public static int height = 41; // must be odd
-    public Canvas canvas;
-    public Color[][] colors;
+    static int width = 41; // must be odd
+    static int height = 41; // must be odd
+    private Canvas canvas;
+    private Color[][] colors;
     private GraphicsContext graphicsContext;
 
-    public RasterGraphicsPart(Color[][] colors) {
+    RasterGraphicsPart(Color[][] colors) {
         this.colors = colors;
         this.canvas = new Canvas(width, height);
+        this.canvas.getStyleClass().add("part");
         graphicsContext = canvas.getGraphicsContext2D();
     }
 
@@ -27,11 +26,13 @@ public class RasterGraphicsPart {
         PixelWriter pixelWriter = writableImage.getPixelWriter();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                pixelWriter.setColor(x, y, Color.color(
-                        colors[x][y].getRed(),
-                        colors[x][y].getGreen(),
-                        colors[x][y].getBlue()
-                ));
+                Color col = colors[x][y];
+                if (col != null)
+                    pixelWriter.setColor(x, y, Color.color(
+                            col.getRed(),
+                            col.getGreen(),
+                            col.getBlue()
+                    ));
             }
         }
         graphicsContext.drawImage(writableImage, 0, 0);
@@ -42,14 +43,18 @@ public class RasterGraphicsPart {
         return Double.toString(this.getMeanRedPart());
     }
 
-    public double getMeanRedPart() {
+    double getMeanRedPart() {
         double redPart = 0;
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                redPart += colors[x][y].getRed();
+        int all = 0;
+        for (Color[] color : colors) {
+            for (Color aColor : color) {
+                if (aColor != null) {
+                    redPart += aColor.getRed();
+                    all++;
+                }
             }
         }
-        return redPart;
+        return redPart / all;
     }
 
 }

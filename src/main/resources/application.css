@@ -10,3 +10,9 @@
     -fx-border-width:2px;
     -fx-border-radius:5px;
 }
+.part {
+    -fx-border-color: #000000;
+    -fx-border-style:solid;
+    -fx-border-width:2px;
+    -fx-border-radius:5px;
+}
